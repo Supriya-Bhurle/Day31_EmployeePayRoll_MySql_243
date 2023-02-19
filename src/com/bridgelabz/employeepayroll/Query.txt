@@ -102,3 +102,27 @@ mysql> select * from employee_payroll;
 
 -------------------------------------------------------------------------------------------------------
 
+UC5 :- Ability to retrieve salary data for a particular employee as well as all employees who 
+have joined in a particular data range from the payroll service database.
+
+=====================================================================================================
+
+mysql> select * from employee_payroll where name = 'Surabhi';
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  3 | Surabhi |  50000 | 2023-01-15 |
++----+---------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from Employee_Payroll where start between cast('2022-01-01' as DATE) and DATE(NOW());
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  1 | Mansi   |  40000 | 2022-09-10 |
+|  3 | Surabhi |  50000 | 2023-01-15 |
++----+---------+--------+------------+
+2 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------
+
