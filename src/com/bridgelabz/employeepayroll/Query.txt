@@ -56,4 +56,25 @@ mysql> desc employee_payroll;
 
 
 
-----------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+uc3:-Ability to create employee payroll data in the payroll service database as 
+part of CRUD Operation - Use payroll_service database.
+
+=======================================================================================================
+
+mysql> insert into Employee_payroll(name,salary,start)values
+    -> ('Mansi','40000.00','2022-09-10'),
+    -> ('Shivani','30000.00','2021-08-24'),
+    -> ('Surabhi','50000','2023-01-15');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  1 | Mansi   |  40000 | 2022-09-10 |
+|  2 | Shivani |  30000 | 2021-08-24 |
+|  3 | Surabhi |  50000 | 2023-01-15 |
++----+---------+--------+------------+
+3 rows in set (0.00 sec)
