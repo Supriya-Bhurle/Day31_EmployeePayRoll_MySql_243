@@ -1,0 +1,102 @@
+uc1 :- Ability to create a payroll service database
+====================================================
+
+mysql> Create Database Payroll_Service;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+
+------------------------------------------------------------------------------------------------
+
+
+UC2 :- Ability to create a employee payroll table in the payroll service database to
+manage employee payrolls.
+================================================================================================
+
+mysql> use payroll_service;
+Database changed
+mysql> create table employee_payroll(
+    -> id INT unsigned NOT NULL AUTO_INCREMENT,
+    -> name VARCHAR(15) NOT NULL,
+    ->  salary Double NOT NULL,
+    -> start DATE NOT NULL,
+    -> PRIMARY KEY(id));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_payroll_service |
++---------------------------+
+| employee_payroll          |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> desc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(15)  | NO   |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+
+---------------------------------------------------------------------------------------------------
+
+UC3 :- Ability to create employee payroll data in the payroll service database as 
+part of CRUD Operation - Use payroll_service database.
+
+====================================================================================================
+
+mysql> insert into Employee_payroll(name,salary,start)values
+    -> ('Mansi','40000.00','2022-09-10'),
+    -> ('Shivani','30000.00','2021-08-24'),
+    -> ('Surabhi','50000','2023-01-15');
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  1 | Mansi   |  40000 | 2022-09-10 |
+|  2 | Shivani |  30000 | 2021-08-24 |
+|  3 | Surabhi |  50000 | 2023-01-15 |
++----+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+
+-----------------------------------------------------------------------------------------------------
+
+uc4 :- Ability to retrieve all the employee payroll data that 
+is added to payroll service database.
+
+=======================================================================================================
+
+mysql> select * from employee_payroll;
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  1 | Mansi   |  40000 | 2022-09-10 |
+|  2 | Shivani |  30000 | 2021-08-24 |
+|  3 | Surabhi |  50000 | 2023-01-15 |
++----+---------+--------+------------+
+3 rows in set (0.00 sec)
+
+
+---------------------------------------------------------------------------------------------------------
