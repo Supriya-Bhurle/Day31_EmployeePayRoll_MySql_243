@@ -126,3 +126,49 @@ mysql> select * from Employee_Payroll where start between cast('2022-01-01' as D
 
 -------------------------------------------------------------------------------------------------------
 
+UC6 :- Ability to find sum, average, min,max and number of male 
+and female employees.
+
+=========================================================================================================
+
+ mysql> insert into Employee_Payroll(name,salary,start)values
+    -> ('Ankush','35000.00','2019-07-20');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee_payroll;
++----+---------+--------+------------+
+| id | name    | salary | start      |
++----+---------+--------+------------+
+|  1 | Mansi   |  40000 | 2022-09-10 |
+|  2 | Shivani |  30000 | 2021-08-24 |
+|  3 | Surabhi |  50000 | 2023-01-15 |
+|  4 | Ankush  |  35000 | 2019-07-20 |
++----+---------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table Employee_Payroll add gender VARCHAR(6) after name;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  update Employee_Payroll set gender = 'Female' where name = 'Mansi' o
+r name = 'Shivani' or name = 'Surabhi';
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql>  update Employee_Payroll set gender = 'Male' where  name = 'Ankush';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+--------+--------+------------+
+| id | name    | gender | salary | start      |
++----+---------+--------+--------+------------+
+|  1 | Mansi   | Female |  40000 | 2022-09-10 |
+|  2 | Shivani | Female |  30000 | 2021-08-24 |
+|  3 | Surabhi | Female |  50000 | 2023-01-15 |
+|  4 | Ankush  | Male   |  35000 | 2019-07-20 |
++----+---------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------
+
