@@ -382,6 +382,97 @@ mysql> select * from employee_payroll;
 +----+---------+-------------+------------+------------------+--------+--------+------------+
 4 rows in set (0.00 sec)
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+UC9 :- Ability to extend employee_payroll table to have Basic Pay,Deductions, Taxable Pay,Income Tax, Net Pay
+
+============================================================================================================================================================
+
+
+mysql> alter table employee_payroll add basicpay Double NOT NULL after salary;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add deduction Double NOT NULL after basicpay;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add taxablepay Double NOT NULL after deduction;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll add incometax Double NOT NULL after taxablepay;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  alter table employee_payroll add netpay Double NOT NULL after incometax;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++-------------+--------------+------+-----+------------+----------------+
+| Field       | Type         | Null | Key | Default    | Extra          |
++-------------+--------------+------+-----+------------+----------------+
+| id          | int unsigned | NO   | PRI | NULL       | auto_increment |
+| name        | varchar(15)  | NO   |     | NULL       |                |
+| phonenumber | varchar(20)  | YES  |     | NULL       |                |
+| address     | varchar(20)  | NO   |     | Bramhapuri |                |
+| department  | varchar(20)  | NO   |     | NULL       |                |
+| gender      | varchar(6)   | YES  |     | NULL       |                |
+| salary      | double       | NO   |     | NULL       |                |
+| basicpay    | double       | NO   |     | NULL       |                |
+| deduction   | double       | NO   |     | NULL       |                |
+| taxablepay  | double       | NO   |     | NULL       |                |
+| incometax   | double       | NO   |     | NULL       |                |
+| netpay      | double       | NO   |     | NULL       |                |
+| start       | date         | NO   |     | NULL       |                |
++-------------+--------------+------+-----+------------+----------------+
+13 rows in set (0.00 sec)
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+| id | name    | phonenumber | address    | department       | gender | salary | basicpay | deduction | taxablepay | incometax | netpay | start      |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri | Devops Engineer  | Female |  40000 |        0 |         0 |          0 |         0 |      0 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri | Design Engineer  | Female |  30000 |        0 |         0 |          0 |         0 |      0 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri | Manual Testing   | Female |  50000 |        0 |         0 |          0 |         0 |      0 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri | Python Developer | Male   |  35000 |        0 |         0 |          0 |         0 |      0 | 2019-07-20 |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee_payroll set basicpay = '20000', deduction = '3000', taxablepay = '2000', incometax = '2600', netpay = '12400'
+    -> where name  = 'Mansi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set basicpay = '30000', deduction = '3000', taxablepay = '2500', incometax = '2700', netpay = '14600'
+    -> where name  = 'Shivani';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set basicpay = '35000', deduction = '3200', taxablepay = '2600', incometax = '2800', netpay = '15700'
+    -> where name  = 'Surabhi';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set basicpay = '40000', deduction = '3500', taxablepay = '2700', incometax = '3000', netpay = '16000'
+    -> where name  = 'Ankush';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+| id | name    | phonenumber | address    | department       | gender | salary | basicpay | deduction | taxablepay | incometax | netpay | start      |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri | Devops Engineer  | Female |  40000 |    20000 |      3000 |       2000 |      2600 |  12400 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri | Design Engineer  | Female |  30000 |    30000 |      3000 |       2500 |      2700 |  14600 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri | Manual Testing   | Female |  50000 |    35000 |      3200 |       2600 |      2800 |  15700 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri | Python Developer | Male   |  35000 |    40000 |      3500 |       2700 |      3000 |  16000 | 2019-07-20 |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+4 rows in set (0.00 sec)
+
+
 
 
 
