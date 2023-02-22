@@ -235,3 +235,153 @@ mysql> select COUNT(id) from Employee_Payroll GROUP BY gender;
 
 ----------------------------------------------------------------------------------------------------------
 
+UC8 :- Ability to extend employee_payroll data to store  employee information like employee phone, 
+address and department.
+
+=======================================================================================================
+
+
+mysql> select * from employee_payroll;
++----+---------+--------+--------+------------+
+| id | name    | gender | salary | start      |
++----+---------+--------+--------+------------+
+|  1 | Mansi   | Female |  40000 | 2022-09-10 |
+|  2 | Shivani | Female |  30000 | 2021-08-24 |
+|  3 | Surabhi | Female |  50000 | 2023-01-15 |
+|  4 | Ankush  | Male   |  35000 | 2019-07-20 |
++----+---------+--------+--------+------------+
+4 rows in set (0.01 sec)
+
+mysql>  alter table employee_payroll
+    ->  add phoneNumber INT(10) after name;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> alter table employee_payroll
+    ->  add address Varchar(20) NOT NULL after PhoneNumber;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table employee_payroll
+    ->  add department Varchar(20) NOT NULL after Address;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>  alter table employee_payroll
+    -> alter address SET DEFAULT 'Bramhapuri';
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee_payroll;
++-------------+--------------+------+-----+------------+----------------+
+| Field       | Type         | Null | Key | Default    | Extra          |
++-------------+--------------+------+-----+------------+----------------+
+| id          | int unsigned | NO   | PRI | NULL       | auto_increment |
+| name        | varchar(15)  | NO   |     | NULL       |                |
+| phoneNumber | int          | YES  |     | NULL       |                |
+| address     | varchar(20)  | NO   |     | Bramhapuri |                |
+| department  | varchar(20)  | NO   |     | NULL       |                |
+| gender      | varchar(6)   | YES  |     | NULL       |                |
+| salary      | double       | NO   |     | NULL       |                |
+| start       | date         | NO   |     | NULL       |                |
++-------------+--------------+------+-----+------------+----------------+
+8 rows in set (0.01 sec)
+
+mysql> select * from employee_payroll;
++----+---------+-------------+---------+------------+--------+--------+------------+
+| id | name    | phoneNumber | address | department | gender | salary | start      |
++----+---------+-------------+---------+------------+--------+--------+------------+
+|  1 | Mansi   |        NULL |         |            | Female |  40000 | 2022-09-10 |
+|  2 | Shivani |        NULL |         |            | Female |  30000 | 2021-08-24 |
+|  3 | Surabhi |        NULL |         |            | Female |  50000 | 2023-01-15 |
+|  4 | Ankush  |        NULL |         |            | Male   |  35000 | 2019-07-20 |
++----+---------+-------------+---------+------------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employee_payroll
+    ->  modify phonenumber
+    -> Varchar(20);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> update employee_payroll set phonenumber = '9765935131'
+    ->  where name = 'Mansi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set phonenumber = '9765940347'
+    ->  where name = 'shivani';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set phonenumber = '9421869425'
+    ->  where name = 'Surabhi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set phonenumber = '9634069359'
+    ->  where name = 'Ankush';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+-------------+---------+------------+--------+--------+------------+
+| id | name    | phonenumber | address | department | gender | salary | start      |
++----+---------+-------------+---------+------------+--------+--------+------------+
+|  1 | Mansi   | 9765935131  |         |            | Female |  40000 | 2022-09-10 |
+|  2 | Shivani | 9765940347  |         |            | Female |  30000 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  |         |            | Female |  50000 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  |         |            | Male   |  35000 | 2019-07-20 |
++----+---------+-------------+---------+------------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee_payroll set address = 'Bramhapuri'
+    ->  where name = 'Mansi' or name = 'Shivani' or name = 'Surabhi' or name = 'Ankush';
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------+--------+--------+------------+
+| id | name    | phonenumber | address    | department | gender | salary | start      |
++----+---------+-------------+------------+------------+--------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri |            | Female |  40000 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri |            | Female |  30000 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri |            | Female |  50000 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri |            | Male   |  35000 | 2019-07-20 |
++----+---------+-------------+------------+------------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update employee_payroll set department = 'Devops Engineer'
+    -> where name = 'Mansi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set department = 'Design Engineer'
+    -> where name = 'shivani';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set department = 'Manual Testing'
+    -> where name = 'Surabhi';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll set department = 'Python Developer'
+    -> where name = 'Ankush';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------------+--------+--------+------------+
+| id | name    | phonenumber | address    | department       | gender | salary | start      |
++----+---------+-------------+------------+------------------+--------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri | Devops Engineer  | Female |  40000 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri | Design Engineer  | Female |  30000 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri | Manual Testing   | Female |  50000 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri | Python Developer | Male   |  35000 | 2019-07-20 |
++----+---------+-------------+------------+------------------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+
+
+
