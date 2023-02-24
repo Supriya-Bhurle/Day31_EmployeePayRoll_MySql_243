@@ -472,6 +472,75 @@ mysql> select * from employee_payroll;
 +----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
 4 rows in set (0.00 sec)
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+UC10 :- Ability to make Terissa as part of Sales and Marketing Department
+- Note: The Complete employee payroll roll need to be Inserted 
+If a Salary is now going to be updated multiple rows has to be updated
+creating unnecessary redundancy
+- Further There is 2 Employee ID so according to Database there is two
+different Terissa'
+===================================================================================================================================================================
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+| id | name    | phonenumber | address    | department       | gender | salary | basicpay | deduction | taxablepay | incometax | netpay | start      |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri | Devops Engineer  | Female |  40000 |    20000 |      3000 |       2000 |      2600 |  12400 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri | Design Engineer  | Female |  30000 |    30000 |      3000 |       2500 |      2700 |  14600 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri | Manual Testing   | Female |  50000 |    35000 |      3200 |       2600 |      2800 |  15700 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri | Python Developer | Male   |  35000 |    40000 |      3500 |       2700 |      3000 |  16000 | 2019-07-20 |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee_payroll(name,phonenumber,address,department,gender,salary,basicpay,deduction,taxablepay,incometax,netpay,start) values
+    -> ('Terisa','7719244417','Mumbai','Sales','Female',26000.00,20000.00,2000.00,1200.00,1200.00,12800.00,'2022-6-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+| id | name    | phonenumber | address    | department       | gender | salary | basicpay | deduction | taxablepay | incometax | netpay | start      |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri | Devops Engineer  | Female |  40000 |    20000 |      3000 |       2000 |      2600 |  12400 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri | Design Engineer  | Female |  30000 |    30000 |      3000 |       2500 |      2700 |  14600 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri | Manual Testing   | Female |  50000 |    35000 |      3200 |       2600 |      2800 |  15700 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri | Python Developer | Male   |  35000 |    40000 |      3500 |       2700 |      3000 |  16000 | 2019-07-20 |
+|  5 | Terisa  | 7719244417  | Mumbai     | Sales            | Female |  26000 |    20000 |      2000 |       1200 |      1200 |  12800 | 2022-06-23 |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employee_payroll(name,phonenumber,address,department,gender,salary,basicpay,deduction,taxablepay,incometax,netpay,start) values
+    -> ('Terisa','8656342412','Delhi','Full Stack','Female',30000.00,30000.00,3000.00,1300.00,1300.00,13800.00,'2023-6-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from employee_payroll;
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+| id | name    | phonenumber | address    | department       | gender | salary | basicpay | deduction | taxablepay | incometax | netpay | start      |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+|  1 | Mansi   | 9765935131  | Bramhapuri | Devops Engineer  | Female |  40000 |    20000 |      3000 |       2000 |      2600 |  12400 | 2022-09-10 |
+|  2 | Shivani | 9765940347  | Bramhapuri | Design Engineer  | Female |  30000 |    30000 |      3000 |       2500 |      2700 |  14600 | 2021-08-24 |
+|  3 | Surabhi | 9421869425  | Bramhapuri | Manual Testing   | Female |  50000 |    35000 |      3200 |       2600 |      2800 |  15700 | 2023-01-15 |
+|  4 | Ankush  | 9634069359  | Bramhapuri | Python Developer | Male   |  35000 |    40000 |      3500 |       2700 |      3000 |  16000 | 2019-07-20 |
+|  5 | Terisa  | 7719244417  | Mumbai     | Sales            | Female |  26000 |    20000 |      2000 |       1200 |      1200 |  12800 | 2022-06-23 |
+|  6 | Terisa  | 8656342412  | Delhi      | Full Stack       | Female |  30000 |    30000 |      3000 |       1300 |      1300 |  13800 | 2023-06-23 |
++----+---------+-------------+------------+------------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql>  select * from employee_payroll where name = 'Terisa';
++----+--------+-------------+---------+------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+| id | name   | phonenumber | address | department | gender | salary | basicpay | deduction | taxablepay | incometax | netpay | start      |
++----+--------+-------------+---------+------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+|  5 | Terisa | 7719244417  | Mumbai  | Sales      | Female |  26000 |    20000 |      2000 |       1200 |      1200 |  12800 | 2022-06-23 |
+|  6 | Terisa | 8656342412  | Delhi   | Full Stack | Female |  30000 |    30000 |      3000 |       1300 |      1300 |  13800 | 2023-06-23 |
++----+--------+-------------+---------+------------+--------+--------+----------+-----------+------------+-----------+--------+------------+
+2 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 
