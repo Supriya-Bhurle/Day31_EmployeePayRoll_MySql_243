@@ -537,6 +537,63 @@ mysql>  select * from employee_payroll where name = 'Terisa';
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+UC11 :- Implement the ER Diagram into Payroll Service DB.
+===================================================================================================================================================================
+
+mysql> desc employee_department;
++---------+------+------+-----+---------+----------------+
+| Field   | Type | Null | Key | Default | Extra          |
++---------+------+------+-----+---------+----------------+
+| Emp_Id  | int  | NO   | PRI | NULL    | auto_increment |
+| Dept_Id | int  | YES  |     | NULL    |                |
++---------+------+------+-----+---------+----------------+
+2 rows in set (0.01 sec)
+
+mysql>  select Sum(Salary) from employee_payroll;
++-------------+
+| Sum(Salary) |
++-------------+
+|      211000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>  select min(Salary) from employee_payroll;
++-------------+
+| min(Salary) |
++-------------+
+|       26000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql>  select max(Salary) from employee_payroll;
++-------------+
+| max(Salary) |
++-------------+
+|       50000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Salary) from employee_payroll;
++--------------------+
+| avg(Salary)        |
++--------------------+
+| 35166.666666666664 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(Id) from employee_payroll;
++-----------+
+| count(Id) |
++-----------+
+|         6 |
++-----------+
+1 row in set (0.00 sec)
+
+----------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
 
